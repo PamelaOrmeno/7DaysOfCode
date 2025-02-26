@@ -8,23 +8,23 @@ function compararValores() {
     let stringDiez = '10';
 
     let resultado = ">> Reto #7DaysOfCode - Día 1: Operaciones Booleanas en JavaScript\n\n";
-    
+
     if (numeroUn == stringUn && numeroUn !== stringUn) {
-        resultado += "✓ numeroUn y stringUn tienen el mismo valor, pero tipos diferentes.\n";
+        resultado += "✓ Las variables numeroUn y stringUn tienen el mismo valor, pero tipos diferentes.\n";
     } else {
-        resultado += "✗ numeroUn y stringUn no tienen el mismo valor.\n";
+        resultado += "✗ Las variables numeroUn y stringUn no tienen el mismo valor.\n";
     }
 
     if (numeroTreinta === stringTreinta) {
-        resultado += "✓ numeroTreinta y stringTreinta tienen el mismo valor y el mismo tipo.\n";
+        resultado += "✓ Las variables numeroTreinta y stringTreinta tienen el mismo valor y el mismo tipo.\n";
     } else {
-        resultado += "✗ numeroTreinta y stringTreinta no tienen el mismo tipo.\n";
+        resultado += "✗ Las variables numeroTreinta y stringTreinta no tienen el mismo tipo.\n";
     }
 
     if (numeroDiez == stringDiez && numeroDiez !== stringDiez) {
-        resultado += "✓ numeroDiez y stringDiez tienen el mismo valor, pero tipos diferentes.\n";
+        resultado += "✓ Las varibles numeroDiez y stringDiez tienen el mismo valor, pero tipos diferentes.\n";
     } else {
-        resultado += "✗ numeroDiez y stringDiez no tienen el mismo valor.\n";
+        resultado += "✗ Las variables numeroDiez y stringDiez no tienen el mismo valor.\n";
     }
 
     console.log(resultado);

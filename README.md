@@ -1,6 +1,6 @@
 # #7DaysOfCode - Día 1: Operaciones Booleanas en JavaScript
 
-Este es el reto del **Día 1** de #7DaysOfCode, donde exploramos las **operaciones booleanas en JavaScript**. El ejercicio original consistía en realizar comparaciones de valores en la consola del navegador. Sin embargo, en esta versión hemos agregado una **interfaz en HTML, CSS y JavaScript** con una salida visual inspirada en una terminal de desarrollador.
+Este repositorio contiene la solución al desafío #7DaysOfCode, un reto diseñado para mejorar las habilidades en JavaScript a lo largo de varios días. Cada día se presenta un nuevo ejercicio que ayuda a fortalecer la lógica de programación y el uso de JavaScript en distintas situaciones.
 
 ---
 
@@ -11,11 +11,16 @@ Este es el reto del **Día 1** de #7DaysOfCode, donde exploramos las **operacion
 
 ---
 
-## 📌 Funcionalidad
-- Compara valores con `==`, `===` y `!==`.
-- Muestra los resultados en **consola** y en la interfaz tipo "terminal".
-- Diseño limpio y accesible para cualquier usuario.
-- Código organizado y estructurado en archivos separados (`index.html`, `style.css`, `script.js`).
+## 📌 Descripción del Proyecto
+
+Este repositorio almacena los diferentes retos completados de #7DaysOfCode. Cada ejercicio se desarrolla en un ambiente web, complementando las soluciones con una representación visual para facilitar su comprensión y aplicación.
+
+Actualmente, se ha implementado el Día 1 - Operaciones Booleanas en JavaScript, donde exploramos las comparaciones entre valores en JavaScript y cómo evitar errores por conversión implícita de tipos.
+
+- Comparaciones usando ==, === y !==.
+- Muestra los resultados tanto en consola como en una interfaz gráfica.
+- Diseño accesible con estilo de salida en "modo consola".
+- Código estructurado en archivos separados (index.html, style.css, script.js).
 
 ---
 

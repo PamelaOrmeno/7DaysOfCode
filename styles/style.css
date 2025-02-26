@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
+
+:root {
+    --color-primario: #F4F4F4;  /* Gris claro, limpio */
+    --color-secundario: #3F72AF; /* Azul profesional */
+    --color-terciario: #E0E0E0;  /* Gris medio para caja */
+    --color-button: #3F72AF;     /* Azul corporativo */
+    --color-hover: #2C5B89;      /* Azul más oscuro en hover */
+    --color-texto: #333333;      /* Negro suave */
+    --color-resultado-fondo: #D9D9D9; /* Gris claro en resultados */
+
+    --fuente-krona: 'Krona One', sans-serif;
+    --fuente-montserrat: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--color-primario);
+    color: var(--color-texto);
+    font-family: var(--fuente-montserrat);
+    line-height: 1.6;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--color-secundario);
+    font-family: var(--fuente-krona);
+}
+
+.container {
+    background: var(--color-terciario);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: var(--color-button);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; 
+}
+
+button:hover {
+    background-color: var(--color-hover);
+}
+
+
+
+
+#resultado {
+    margin-top: 20px;
+    background-color: #1E1E1E; /* Color de fondo similar a la consola */
+    color: #33FF33; /* Verde neón típico de la consola */
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    padding: 15px;
+    border-radius: 5px;
+    display: block;
+    text-align: left;
+    line-height: 1.5;
+    max-width: 90%;
+    white-space: pre-line;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #33FF33; /* Simula un prompt en la consola */
+}
+
+
+
+#resultado ul {
+    list-style-type: disc; /* Viñetas clásicas */
+    padding-left: 20px; /* Espaciado para la lista */
+}
+
+#resultado li {
+    margin-bottom: 12px; /* Aumenta espacio entre cada ítem */
+}
+

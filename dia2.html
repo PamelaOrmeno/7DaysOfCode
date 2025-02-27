@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#7DaysOfCode</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="img">
+        <div class="retos-container">
+            <a class="header__menu__link" href="index.html">Inicio</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <p><strong>🚀 Reto del Día 2:</strong>Captura de datos en JavaScript.</p>
+            <p>Responde las siguientes preguntas:</p>
+            <form id="formulario" class="form-dia2">
+                <label for="nombre">¿Cuál es tu nombre?</label>
+                <input type="text" id="nombre" required oninput="formatearTexto(this)">
+
+                <label for="edad">¿Cuántos años tienes?</label>
+                <input type="number" id="edad" required>
+
+                <label for="lenguaje">¿Qué lenguaje de programación estás estudiando?</label>
+                <input type="text" id="lenguaje" required oninput="formatearTexto(this)">
+
+                <button type="submit" onclick="procesarFormulario" id="btnEnviar">Enviar</button>
+            </form>
+            <p id="mensaje"></p>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

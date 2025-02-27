@@ -6,21 +6,26 @@ Este repositorio contiene la solución al desafío #7DaysOfCode, un reto diseña
 
 ## 🚀 Tecnologías Utilizadas
 - **HTML**: Estructura del proyecto.
-- **CSS**: Estilizado con una interfaz tipo consola.
+- **CSS**: Estilizado con una interfaz.
 - **JavaScript**: Lógica de comparaciones y manipulación del DOM.
 
 ---
 
 ## 📌 Descripción del Proyecto
 
-Este repositorio almacena los diferentes retos completados de #7DaysOfCode. Cada ejercicio se desarrolla en un ambiente web, complementando las soluciones con una representación visual para facilitar su comprensión y aplicación.
+Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. Cada ejercicio se desarrolla en un entorno web, permitiendo la interacción con los conceptos fundamentales de JavaScript.
 
-Actualmente, se ha implementado el Día 1 - Operaciones Booleanas en JavaScript, donde exploramos las comparaciones entre valores en JavaScript y cómo evitar errores por conversión implícita de tipos.
+### 📅 Retos Implementados:
 
-- Comparaciones usando ==, === y !==.
-- Muestra los resultados tanto en consola como en una interfaz gráfica.
-- Diseño accesible con estilo de salida en "modo consola".
-- Código estructurado en archivos separados (index.html, style.css, script.js).
+- **Día 1: Operaciones Booleanas en JavaScript**
+  - Comparaciones usando `==`, `===` y `!==`.
+  - Muestra resultados tanto en la consola como en la interfaz gráfica.
+  - Diseño tipo consola para simular la salida de código.
+
+- **Día 2: Variables y Captura de Datos**
+  - Captura de datos mediante un formulario interactivo en HTML.
+  - Procesamiento y validación de los datos con JavaScript.
+  - Preguntas interactivas al usuario mediante `prompt()`.
 
 ---
 
@@ -30,21 +35,24 @@ Actualmente, se ha implementado el Día 1 - Operaciones Booleanas en JavaScript,
    git clone https://github.com/TU_USUARIO/7DaysOfCode-Dia1.git
    cd 7DaysOfCode-Dia1
 ```
-2. **Abrir el archivo `index.html` en el navegador**.
-3. **Hacer clic en "Ejecutar Comparaciones"** para ver la salida visual en "modo consola".
-4. **Abrir la consola del navegador (`F12` > `Consola`)** para ver los resultados en texto plano.
+2. Abrir el archivo index.html en el navegador.
+3. Explorar los retos disponibles en la página principal.
+4. Interactuar con los desafíos para ver sus funcionalidades.
 
 ---
 
 ## 🖥️ Estructura del Proyecto
 ```
-📂 7DaysOfCode-Dia1
-├── 📄 index.html   # Estructura de la página
+📂 7DaysOfCode
+├── 📄 index.html   # Página principal con el listado de retos
+├── 📄 dia1.html    # Desafío del Día 1 - Operaciones Booleanas
+├── 📄 dia2.html    # Desafío del Día 2 - Variables y Captura de Datos
 ├── 📂 styles
-│   ├── 📄 style.css   # Estilos y diseño visual
+│   ├── 📄 style.css   # Estilos generales del proyecto
 ├── 📂 js
 │   ├── 📄 script.js   # Lógica del ejercicio
-└── 📄 README.md    # Documentación
+└── 📄 README.md    # Documentación del proyecto
+
 ```
 
 ---

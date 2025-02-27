@@ -21,19 +21,57 @@ body {
     padding: 20px;
     text-align: center;
 }
+.header {
+    /*background-color: var(--color-secundario);*/
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 15px;
+    max-width: 80%;
+    margin: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header__menu__link {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: var(--color-button);
+    border-radius: 8px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.header__menu__link:hover {
+    color: var(--color-hover);
+}
+
+.img{
+    border-radius: 20px 20px 0 0; /* Solo arriba */
+    max-width: 80%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+}
 
 h1 {
     color: var(--color-secundario);
     font-family: var(--fuente-krona);
+    text-align: left;
 }
 
 .container {
     background: var(--color-terciario);
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
     max-width: 600px;
     margin: auto;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+}
+.retos-container {
+    text-align: left;
+    max-width: 80%; /* Ajusta el ancho según necesites */
+    margin: auto; /* Centra el contenedor */
+    
 }
 
 button {
@@ -44,35 +82,34 @@ button {
     margin-top: 15px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: bold;
-    transition: background-color 0.3s ease; 
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: var(--color-hover);
+    transform: scale(1.05);
 }
-
-
-
 
 #resultado {
     margin-top: 20px;
-    background-color: #1E1E1E; /* Color de fondo similar a la consola */
-    color: #33FF33; /* Verde neón típico de la consola */
-    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    background-color: #1E1E1E;
+    color: #33FF33;
+    font-family: 'Courier New', Courier, monospace;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     display: block;
     text-align: left;
     line-height: 1.5;
     max-width: 90%;
+    max-height: 200px;
+    overflow-y: auto;
     white-space: pre-line;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    border-left: 4px solid #33FF33; /* Simula un prompt en la consola */
+    border-left: 5px solid #33FF33;
+    font-size: 16px;
 }
-
-
 
 #resultado ul {
     list-style-type: disc; /* Viñetas clásicas */
@@ -83,3 +120,50 @@ button:hover {
     margin-bottom: 12px; /* Aumenta espacio entre cada ítem */
 }
 
+/* Estilos específicos para el formulario del Día 2 */
+.form-dia2 {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 10px;
+    width:100%;
+
+}
+
+.form-dia2 label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form-dia2 input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+    height: 40px;
+}
+
+.form-dia2 button {
+    background-color: var(--color-button);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.form-dia2 button:hover {
+    background-color: var(--color-hover);
+}
+.form-dia2 input:focus {
+    border-color: var(--color-secundario);
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(63, 114, 175, 0.5);
+}

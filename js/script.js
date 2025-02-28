@@ -1,12 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("formulario").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evitar que la página se recargue
-        procesarFormulario();
-    });
+document.addEventListener("DOMContentLoaded", function () {
+    let formulario = document.getElementById("formulario");
+    if (formulario) {  // Verifica que el formulario exista antes de agregar el listener
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault(); // Evitar que la página se recargue
+            procesarFormulario();
+        });
+    }
 });
 
 function compararValores() {
-    
+
     let numeroUn = 1;
     let stringUn = '1';
     let numeroTreinta = 30;
@@ -51,13 +54,13 @@ function procesarFormulario() {
     let nombre = document.getElementById("nombre").value;
     let edad = document.getElementById("edad").value;
     let lenguaje = document.getElementById("lenguaje").value;
-    
+
     // Crear mensaje personalizado
     let mensaje = `Hola ${nombre}, tienes ${edad} años y ya estás aprendiendo ${lenguaje}!`;
-    
+
     // Mostrar el mensaje en la página
     document.getElementById("mensaje").textContent = mensaje;
-    
+
     // Preguntar si le gusta el lenguaje de programación
     setTimeout(() => {
         let respuesta;
@@ -74,4 +77,48 @@ function procesarFormulario() {
             alert("Oh, qué pena... ¿Ya intentaste aprender otros lenguajes?");
         }
     }, 500);
+}
+
+function iniciarJuego() {
+    let area;
+    let camino;
+    let framework;
+
+    do {
+        area = prompt("¿Quieres seguir hacia el área de Front-End o Back-End? (Escribe 'Front-End' o 'Back-End')").toLowerCase();
+        if (area === "front-end") {
+            do {
+                framework = prompt("¿Quieres aprender React o Vue? (Escribe 'React' o 'Vue')").toLowerCase();
+                if (framework === "react" || framework === "vue") {
+                    alert(`¡Genial! ${framework.charAt(0).toUpperCase() + framework.slice(1)} es una excelente opción para el desarrollo Front-End.`);
+                } else {
+                    alert("No ingresaste una opción válida.");
+                }
+            } while (framework !== "react" && framework !== "vue");
+        }
+    } while (area !== "front-end" && area !== "back-end");
+
+    do {
+        camino = prompt("¿Quieres seguir especializándote en esta área o convertirte en Fullstack? (Escribe 'especializarme' o 'fullstack')").toLowerCase();
+        if (camino === "especializarme") {
+            alert("¡Buena elección! Especializarse te hará un experto en tu área.");
+        } else if (camino === "fullstack") {
+            alert("¡Fantástico! Convertirse en Fullstack te abrirá muchas oportunidades.");
+        } else {
+            alert("No ingresaste una opción válida.");
+        }
+    } while (camino !== "especializarme" && camino !== "fullstack");
+
+    let continuar = true;
+    while (continuar) {
+        let tecnologia = prompt("¿Hay alguna otra tecnología que te gustaría aprender? (Escribe el nombre de la tecnología o 'No' para salir)").toLowerCase();
+
+        if (tecnologia === "no") {
+            continuar = false;
+        } else {
+            alert(`¡Interesante! ${tecnologia.charAt(0).toUpperCase() + tecnologia.slice(1)} es una gran tecnología para explorar.`);
+        }
+    }
+
+    alert("¡Gracias por jugar! Sigue aprendiendo y desarrollando tus habilidades en programación.");
 }

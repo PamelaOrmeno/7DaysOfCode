@@ -27,6 +27,13 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
   - Procesamiento y validación de los datos con JavaScript.
   - Preguntas interactivas al usuario mediante `prompt()`.
 
+  - **Día 3: Estructuras de Control de Flujo**
+  - Implementación de estructuras condicionales `if`, `else if`, `else`.
+  - Uso de bucles `while` para validar entradas del usuario.
+  - Creación de un flujo interactivo donde el usuario elige entre Front-End o Back-End.
+  - Elección de tecnologías específicas como React, Vue, C# o Java.
+  - Posibilidad de especialización en un área o convertirse en Fullstack.
+
 ---
 
 ## 🛠 Cómo Ejecutarlo Localmente
@@ -47,6 +54,7 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
 ├── 📄 index.html   # Página principal con el listado de retos
 ├── 📄 dia1.html    # Desafío del Día 1 - Operaciones Booleanas
 ├── 📄 dia2.html    # Desafío del Día 2 - Variables y Captura de Datos
+├── 📄 dia3.html    # Desafío del Día 3 - Estructuras de Control de Flujo
 ├── 📂 styles
 │   ├── 📄 style.css   # Estilos generales del proyecto
 ├── 📂 js

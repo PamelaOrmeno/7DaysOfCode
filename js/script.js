@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
 function compararValores() {
 
     let numeroUn = 1;
@@ -40,6 +41,7 @@ function compararValores() {
     console.log(resultado);
     document.getElementById("resultado").innerText = resultado;
 }
+
 // Función para capitalizar cada palabra correctamente
 function formatearTexto(input) {
     input.value = input.value
@@ -121,4 +123,33 @@ function iniciarJuego() {
     }
 
     alert("¡Gracias por jugar! Sigue aprendiendo y desarrollando tus habilidades en programación.");
+}
+
+
+function iniciarJuegoNumero() {
+    const numeroSecreto = Math.floor(Math.random() * 11);
+    let intentos = 3;
+    let acierto = false;
+
+    while (intentos > 0) {
+        let intentoUsuario = parseInt(prompt(`Ingresa un número entre 0 y 10 (Intentos restantes: ${intentos})`));
+
+        if (isNaN(intentoUsuario) || intentoUsuario < 0 || intentoUsuario > 10) {
+            alert("Por favor, ingresa un número válido entre 0 y 10.");
+            continue;
+        }
+
+        if (intentoUsuario === numeroSecreto) {
+            document.getElementById("mensaje-resultado").textContent = `🎉 ¡Felicidades! Acertaste el número ${numeroSecreto}.`;
+            acierto = true;
+            break;
+        } else {
+            alert("❌ No es el número correcto.");
+            intentos--;
+        }
+    }
+
+    if (!acierto) {
+        document.getElementById("mensaje-resultado").textContent = `😢 Lo siento, te quedaste sin intentos. El número era ${numeroSecreto}.`;
+    }
 }

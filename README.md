@@ -34,15 +34,21 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
   - Elección de tecnologías específicas como React, Vue, C# o Java.
   - Posibilidad de especialización en un área o convertirse en Fullstack.
 
+- **Día 4: Juego de Adivinar el Número**
+  - Uso de `Math.random()` para generar números aleatorios.
+  - Implementación de un ciclo `while` para manejar intentos.
+  - Validación de entrada del usuario para evitar respuestas inválidas.
+  - Interacción con el DOM para mostrar mensajes en pantalla.
+
 ---
 
 ## 🛠 Cómo Ejecutarlo Localmente
 1. **Clonar el repositorio**
 ```bash
-   git clone https://github.com/TU_USUARIO/7DaysOfCode-Dia1.git
-   cd 7DaysOfCode-Dia1
+   git clone https://github.com/TU_USUARIO/7DaysOfCode.git
+   cd 7DaysOfCode
 ```
-2. Abrir el archivo index.html en el navegador.
+2. Abrir el archivo `index.html` en el navegador.
 3. Explorar los retos disponibles en la página principal.
 4. Interactuar con los desafíos para ver sus funcionalidades.
 
@@ -55,12 +61,12 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
 ├── 📄 dia1.html    # Desafío del Día 1 - Operaciones Booleanas
 ├── 📄 dia2.html    # Desafío del Día 2 - Variables y Captura de Datos
 ├── 📄 dia3.html    # Desafío del Día 3 - Estructuras de Control de Flujo
+├── 📄 dia4.html    # Desafío del Día 4 - Adivinar el Número
 ├── 📂 styles
 │   ├── 📄 style.css   # Estilos generales del proyecto
 ├── 📂 js
 │   ├── 📄 script.js   # Lógica del ejercicio
 └── 📄 README.md    # Documentación del proyecto
-
 ```
 
 ---
@@ -69,4 +75,3 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
 Este proyecto es de uso libre para aprendizaje y práctica. 🚀
 
 Si te gustó este proyecto, no dudes en darle ⭐ en **GitHub** y compartirlo en **LinkedIn**. 😊
-

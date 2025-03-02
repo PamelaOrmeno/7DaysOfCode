@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
+//Día 1 - Operaciones Booleanas
 function compararValores() {
 
     let numeroUn = 1;
@@ -37,20 +37,11 @@ function compararValores() {
     } else {
         resultado += "✗ Las variables numeroDiez y stringDiez no tienen el mismo valor.\n";
     }
-
-    console.log(resultado);
+    
     document.getElementById("resultado").innerText = resultado;
 }
 
-// Función para capitalizar cada palabra correctamente
-function formatearTexto(input) {
-    input.value = input.value
-        .toLowerCase()
-        .split(" ") // Dividir por espacios
-        .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1)) // Capitalizar cada palabra
-        .join(" "); // Volver a unir
-}
-
+//Día 2 - Variables y Captura de Datos
 function procesarFormulario() {
     // Capturar valores de los inputs
     let nombre = document.getElementById("nombre").value;
@@ -81,6 +72,16 @@ function procesarFormulario() {
     }, 500);
 }
 
+// Función para capitalizar cada palabra correctamente
+function formatearTexto(input) {
+    input.value = input.value
+        .toLowerCase()
+        .split(" ") // Dividir por espacios
+        .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1)) // Capitalizar cada palabra
+        .join(" "); // Volver a unir
+}
+
+//Día 3 - Operaciones Booleanas
 function iniciarJuego() {
     let area;
     let camino;
@@ -125,7 +126,7 @@ function iniciarJuego() {
     alert("¡Gracias por jugar! Sigue aprendiendo y desarrollando tus habilidades en programación.");
 }
 
-
+//Día 4 - Juego Número Secreto
 function iniciarJuegoNumero() {
     const numeroSecreto = Math.floor(Math.random() * 11);
     let intentos = 3;

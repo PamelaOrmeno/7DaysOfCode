@@ -30,15 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (formulario) {
         formulario.addEventListener("submit", function (event) {
             event.preventDefault();
-            procesarFormulario();
+            agregarAlimento();
         });
     }
     // Update button states
     updateButtonsState();
 });
-
-
-
 
 // Actualiza el estado de los botones según las reglas
 function updateButtonsState() {
@@ -47,7 +44,6 @@ function updateButtonsState() {
     if (crearBtn) crearBtn.disabled = !isListVisible;
     if (agregarBtn) agregarBtn.disabled = isListVisible;
 }
-
 
 // Verifica si la lista está vacía
 function isListEmpty() {
@@ -60,7 +56,6 @@ function isListEmpty() {
 
 //Día 1 - Operaciones Booleanas
 function compararValores() {
-
     let numeroUn = 1;
     let stringUn = '1';
     let numeroTreinta = 30;
@@ -94,32 +89,40 @@ function compararValores() {
 //Día 2 - Variables y Captura de Datos
 function procesarFormulario() {
     // Capturar valores de los inputs
-    let nombre = document.getElementById("nombre").value;
-    let edad = document.getElementById("edad").value;
-    let lenguaje = document.getElementById("lenguaje").value;
+    let nombreElement = document.getElementById("nombre");
+    let edadElement = document.getElementById("edad");
+    let lenguajeElement = document.getElementById("lenguaje");
 
-    // Crear mensaje personalizado
-    let mensaje = `Hola ${nombre}, tienes ${edad} años y ya estás aprendiendo ${lenguaje}!`;
+    if (nombreElement && edadElement && lenguajeElement) {
+        let nombre = nombreElement.value;
+        let edad = edadElement.value;
+        let lenguaje = lenguajeElement.value;
 
-    // Mostrar el mensaje en la página
-    document.getElementById("mensaje").textContent = mensaje;
+        // Crear mensaje personalizado
+        let mensaje = `Hola ${nombre}, tienes ${edad} años y ya estás aprendiendo ${lenguaje}!`;
 
-    // Preguntar si le gusta el lenguaje de programación
-    setTimeout(() => {
-        let respuesta;
-        do {
-            respuesta = prompt(`¿Te gusta estudiar ${lenguaje}? Responde con el número 1 para SÍ o 2 para NO.`);
-            if (respuesta !== "1" && respuesta !== "2") {
-                alert("Por favor, ingresa una respuesta válida (1 o 2).");
+        // Mostrar el mensaje en la página
+        document.getElementById("mensaje").textContent = mensaje;
+
+        // Preguntar si le gusta el lenguaje de programación
+        setTimeout(() => {
+            let respuesta;
+            do {
+                respuesta = prompt(`¿Te gusta estudiar ${lenguaje}? Responde con el número 1 para SÍ o 2 para NO.`);
+                if (respuesta !== "1" && respuesta !== "2") {
+                    alert("Por favor, ingresa una respuesta válida (1 o 2).");
+                }
+            } while (respuesta !== "1" && respuesta !== "2");
+
+            if (respuesta == "1") {
+                alert("¡Muy bien! Sigue estudiando y tendrás mucho éxito.");
+            } else {
+                alert("Oh, qué pena... ¿Ya intentaste aprender otros lenguajes?");
             }
-        } while (respuesta !== "1" && respuesta !== "2");
-
-        if (respuesta == "1") {
-            alert("¡Muy bien! Sigue estudiando y tendrás mucho éxito.");
-        } else {
-            alert("Oh, qué pena... ¿Ya intentaste aprender otros lenguajes?");
-        }
-    }, 500);
+        }, 500);
+    } else {
+        console.error("Uno o más elementos del formulario no se encontraron.");
+    }
 }
 
 // Función para capitalizar cada palabra correctamente
@@ -208,7 +211,6 @@ function iniciarJuegoNumero() {
 // Dia 5 - Lista de Compras
 
 function crearNuevaLista() {
-
     listaDeCompras = {
         Frutas: [],
         Verduras: [],
@@ -227,31 +229,38 @@ function crearNuevaLista() {
 };
 
 function agregarAlimento() {
-    let alimento = document.getElementById("alimento").value.trim();
-    let categoria = document.getElementById("categoria").value;
+    let alimentoElement = document.getElementById("alimento");
+    let categoriaElement = document.getElementById("categoria");
 
-    if (alimento === "") {
-        alert("Por favor, ingresa un alimento.");
-        return;
+    if (alimentoElement && categoriaElement) {
+        let alimento = alimentoElement.value.trim();
+        let categoria = categoriaElement.value;
+
+        if (alimento === "") {
+            alert("Por favor, ingresa un alimento.");
+            return;
+        }
+
+        if (categoria === "Selecciona") {
+            alert("Por favor, selecciona una categoría.");
+            return;
+        }
+
+        // Verificar si el alimento ya existe en la categoría
+        if (listaDeCompras[categoria].includes(alimento)) {
+            alert("Este alimento ya está en la lista.");
+            return;
+        }
+
+        listaDeCompras[categoria].push(alimento);
+        alimentoElement.value = "";
+        categoriaElement.value = "Selecciona";
+        alert("Alimento agregado correctamente!");
+
+        updateButtonsState();
+    } else {
+        console.error("Uno o más elementos del formulario no se encontraron.");
     }
-
-    if (categoria === "Selecciona") {
-        alert("Por favor, selecciona una categoría.");
-        return;
-    }
-
-    // Verificar si el alimento ya existe en la categoría
-    if (listaDeCompras[categoria].includes(alimento)) {
-        alert("Este alimento ya está en la lista.");
-        return;
-    }
-
-    listaDeCompras[categoria].push(alimento);
-    document.getElementById("alimento").value = "";
-    document.getElementById("categoria").value = "Selecciona";
-    alert("Alimento agregado correctamente!");
-
-    updateButtonsState();
 }
 
 function mostrarLista() {

@@ -1,42 +1,51 @@
 let agregarBtn, mostrarBtn, crearBtn;
 let isListVisible = false;
+let listaDeCompras = {
+    Frutas: [],
+    Verduras: [],
+    Lácteos: [],
+    Congelados: [],
+    Dulces: [],
+    Carnes: [],
+    Otros: []
+};
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Initialize buttons
+    agregarBtn = document.querySelector('button[type="submit"]');
+    mostrarBtn = document.querySelector('button[onclick="mostrarLista()"]');
+    crearBtn = document.querySelector('button[onclick="crearNuevaLista()"]');
+
+    // Add event listeners only if elements exist
+    const listaCompras = document.getElementById("listaCompras");
+    if (listaCompras) {
+        listaCompras.addEventListener("click", function (e) {
+            if (e.target.classList.contains("eliminar")) {
+                eliminarAlimento(e.target.dataset.categoria, e.target.dataset.alimento);
+            }
+        });
+    }
+
     const formulario = document.getElementById("formulario");
     if (formulario) {
         formulario.addEventListener("submit", function (event) {
             event.preventDefault();
-            agregarAlimento();
+            procesarFormulario();
         });
     }
-
-    // Event listener para eliminar (DELEGACIÓN DE EVENTOS)
-    document.getElementById('listaCompras').addEventListener('click', function (e) {
-        if (e.target.classList.contains('eliminar')) {
-            const categoria = e.target.dataset.categoria;
-            const alimento = e.target.dataset.alimento;
-            eliminarAlimento(categoria, alimento);
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Selección de botones al cargar la página
-    agregarBtn = document.querySelector('button[type="submit"]');
-    mostrarBtn = document.querySelector('button[onclick="mostrarLista()"]');
-    crearBtn = document.querySelector('button[onclick="crearNuevaLista()"]');
-    
-    // Estado inicial de los botones
+    // Update button states
     updateButtonsState();
 });
+
+
 
 
 // Actualiza el estado de los botones según las reglas
 function updateButtonsState() {
     const isEmpty = isListEmpty();
-    mostrarBtn.disabled = isEmpty;
-    crearBtn.disabled = !isListVisible;
-    agregarBtn.disabled = isListVisible;
+    if (mostrarBtn) mostrarBtn.disabled = isEmpty;
+    if (crearBtn) crearBtn.disabled = !isListVisible;
+    if (agregarBtn) agregarBtn.disabled = isListVisible;
 }
 
 
@@ -48,20 +57,6 @@ function isListEmpty() {
     }
     return true;
 }
-
-
-
-
-
-
- // Event listener para eliminar
- document.getElementById('listaCompras').addEventListener('click', function (e) {
-    if (e.target.classList.contains('eliminar')) {
-        const categoria = e.target.dataset.categoria;
-        const alimento = e.target.dataset.alimento;
-        eliminarAlimento(categoria, alimento);
-    }
-});
 
 //Día 1 - Operaciones Booleanas
 function compararValores() {
@@ -211,16 +206,6 @@ function iniciarJuegoNumero() {
 }
 
 // Dia 5 - Lista de Compras
-
-let listaDeCompras = {
-    Frutas: [],
-    Verduras: [],
-    Lácteos: [],
-    Congelados: [],
-    Dulces: [],
-    Carnes: [],
-    Otros: []
-}
 
 function crearNuevaLista() {
 

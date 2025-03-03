@@ -1,10 +1,65 @@
+let agregarBtn, mostrarBtn, crearBtn;
+let isListVisible = false;
+
 document.addEventListener("DOMContentLoaded", function () {
-    let formulario = document.getElementById("formulario");
-    if (formulario) {  // Verifica que el formulario exista antes de agregar el listener
+    const formulario = document.getElementById("formulario");
+    if (formulario) {
         formulario.addEventListener("submit", function (event) {
-            event.preventDefault(); // Evitar que la página se recargue
-            procesarFormulario();
+            event.preventDefault();
+            agregarAlimento();
         });
+    }
+
+    // Event listener para eliminar (DELEGACIÓN DE EVENTOS)
+    document.getElementById('listaCompras').addEventListener('click', function (e) {
+        if (e.target.classList.contains('eliminar')) {
+            const categoria = e.target.dataset.categoria;
+            const alimento = e.target.dataset.alimento;
+            eliminarAlimento(categoria, alimento);
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Selección de botones al cargar la página
+    agregarBtn = document.querySelector('button[type="submit"]');
+    mostrarBtn = document.querySelector('button[onclick="mostrarLista()"]');
+    crearBtn = document.querySelector('button[onclick="crearNuevaLista()"]');
+    
+    // Estado inicial de los botones
+    updateButtonsState();
+});
+
+
+// Actualiza el estado de los botones según las reglas
+function updateButtonsState() {
+    const isEmpty = isListEmpty();
+    mostrarBtn.disabled = isEmpty;
+    crearBtn.disabled = !isListVisible;
+    agregarBtn.disabled = isListVisible;
+}
+
+
+// Verifica si la lista está vacía
+function isListEmpty() {
+    for (let categoria in listaDeCompras) {
+        if (categoria === 'Selecciona') continue;
+        if (listaDeCompras[categoria].length > 0) return false;
+    }
+    return true;
+}
+
+
+
+
+
+
+ // Event listener para eliminar
+ document.getElementById('listaCompras').addEventListener('click', function (e) {
+    if (e.target.classList.contains('eliminar')) {
+        const categoria = e.target.dataset.categoria;
+        const alimento = e.target.dataset.alimento;
+        eliminarAlimento(categoria, alimento);
     }
 });
 
@@ -37,7 +92,7 @@ function compararValores() {
     } else {
         resultado += "✗ Las variables numeroDiez y stringDiez no tienen el mismo valor.\n";
     }
-    
+
     document.getElementById("resultado").innerText = resultado;
 }
 
@@ -152,5 +207,108 @@ function iniciarJuegoNumero() {
 
     if (!acierto) {
         document.getElementById("mensaje-resultado").textContent = `😢 Lo siento, te quedaste sin intentos. El número era ${numeroSecreto}.`;
+    }
+}
+
+// Dia 5 - Lista de Compras
+
+let listaDeCompras = {
+    Frutas: [],
+    Verduras: [],
+    Lácteos: [],
+    Congelados: [],
+    Dulces: [],
+    Carnes: [],
+    Otros: []
+}
+
+function crearNuevaLista() {
+
+    listaDeCompras = {
+        Frutas: [],
+        Verduras: [],
+        Lácteos: [],
+        Congelados: [],
+        Dulces: [],
+        Carnes: [],
+        Otros: []
+    }
+    document.getElementById("listaCompras").innerHTML = "";
+    document.getElementById("alimento").value = "";
+    document.getElementById("categoria").value = "Selecciona";
+
+    isListVisible = false;
+    updateButtonsState();
+};
+
+function agregarAlimento() {
+    let alimento = document.getElementById("alimento").value.trim();
+    let categoria = document.getElementById("categoria").value;
+
+    if (alimento === "") {
+        alert("Por favor, ingresa un alimento.");
+        return;
+    }
+
+    if (categoria === "Selecciona") {
+        alert("Por favor, selecciona una categoría.");
+        return;
+    }
+
+    // Verificar si el alimento ya existe en la categoría
+    if (listaDeCompras[categoria].includes(alimento)) {
+        alert("Este alimento ya está en la lista.");
+        return;
+    }
+
+    listaDeCompras[categoria].push(alimento);
+    document.getElementById("alimento").value = "";
+    document.getElementById("categoria").value = "Selecciona";
+    alert("Alimento agregado correctamente!");
+
+    updateButtonsState();
+}
+
+function mostrarLista() {
+    let listaHtml = "<h3>Lista de Compras:</h3>";
+
+    // Recorrer solo las categorías que tienen items
+    for (let categoria in listaDeCompras) {
+        // Saltar la categoría "Selecciona"
+        if (categoria === "Selecciona") {
+            continue;
+        }
+
+        listaHtml += `<div class="categoria-titulo">${categoria}:</div>`;
+        listaHtml += `<div class="categoria-items">`;
+
+        if (listaDeCompras[categoria].length === 0) {
+            listaHtml += `<div class="vacio">Nada por aquí</div>`;
+        } else {
+            listaDeCompras[categoria].forEach(alimento => {
+                listaHtml += `
+                <div class="item">
+                 <span>${alimento}</span>
+                 <button class="eliminar" 
+                data-categoria="${categoria}" 
+                data-alimento="${alimento}">X</button>
+                </div>`;
+            });
+        }
+        listaHtml += `</div>`; // Cierre de categoria-items
+    }
+
+    document.getElementById("listaCompras").innerHTML = listaHtml;
+
+    isListVisible = true;
+    updateButtonsState();
+}
+
+function eliminarAlimento(categoria, alimento) {
+    const index = listaDeCompras[categoria].indexOf(alimento);
+    if (index > -1) {
+        listaDeCompras[categoria].splice(index, 1);
+        mostrarLista(); // Actualizar la vista
+        updateButtonsState();
     }
 }

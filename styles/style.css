@@ -11,7 +11,11 @@
         flex-direction: column;
     }
 }
-
+@media (max-width: 480px) {
+    .categoria-items {
+        grid-template-columns: 1fr;
+    }
+}
 :root {
     --color-primario: #F4F4F4;  /* Gris claro, limpio */
     --color-secundario: #3F72AF; /* Azul profesional */
@@ -179,4 +183,103 @@ button:hover {
     border-color: var(--color-secundario);
     outline: none;
     box-shadow: 0px 0px 8px rgba(63, 114, 175, 0.5);
+}
+
+
+
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+button:hover {
+    background-color: #45a049;
+}
+#listaCompras {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+.categoria-titulo {
+    color: #333;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.categoria-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 12px;
+    padding: 10px;
+}
+.vacio {
+    color: #999;
+    font-style: italic;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 4px 0;
+}
+
+.item > span {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+
+.eliminar {
+    background: #ff4444 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.eliminar:hover {
+    background: #cc0000 !important;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

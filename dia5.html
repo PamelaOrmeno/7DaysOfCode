@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="img">
+        <div class="retos-container">
+            <a class="header__menu__link" href="index.html">Inicio</a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Lista de Compras</h2>
+            <form id="formulario">
+                <div class="input-group">
+                    <label for="alimento">Nombre del alimento:</label>
+                    <input type="text" id="alimento" placeholder="Ej: Manzana" oninput="formatearTexto(this)">
+                </div>
+                <div class="input-group">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria">
+                        <option value="Selecciona">Selecciona Categoría</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Lácteos">Lácteos</option>
+                        <option value="Congelados">Congelados</option>
+                        <option value="Dulces">Dulces</option>
+                        <option value="Carnes">Carnes</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+                <div class="botones-container">
+                    <button type="submit">Agregar</button>
+                    <button type="button" onclick="mostrarLista()">Mostrar Lista</button>
+                    <button type="button" onclick="crearNuevaLista()">Crear nueva lista</button>
+                </div>
+            </form>
+  
+            <div id="listaCompras"></div>
+        </div>
+    </main>
+        <script src="/js/script.js"></script>
+</body>
+
+</html>

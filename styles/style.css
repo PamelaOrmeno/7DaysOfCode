@@ -48,19 +48,22 @@ body {
 }
 
 .header__menu__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;  /* Hace que todos los enlaces ocupen todo el ancho de la celda */
+    height: 50px; /* Ajusta la altura para que todos sean iguales */
     font-size: 1.25rem;
     font-weight: bold;
     color: white;
     text-decoration: none;
-    padding: 10px 15px;
     background-color: var(--color-button);
     border-radius: 8px;
-    display: inline-block;
-    transition: color 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .header__menu__link:hover {
-    color: var(--color-hover);
+    background-color: var(--color-hover);
 }
 
 .img{
@@ -86,9 +89,8 @@ h1 {
 .retos-container {
     display: flex;
     flex-direction: row;
-   justify-content: center;
-gap: 20px;
-    
+    justify-content: center;
+    gap: 20px;
 }
 
 button {
@@ -186,8 +188,6 @@ button:hover {
 }
 
 
-
-
 h2 {
     color: #333;
     text-align: center;
@@ -283,3 +283,21 @@ button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    width: 33.33%; /* Para que las columnas tengan el mismo ancho */
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+

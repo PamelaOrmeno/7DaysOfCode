@@ -41,12 +41,13 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
   - Interacción con el DOM para mostrar mensajes en pantalla.
 
 
-  - **Día 5: Lista de Compras**
-  - Creación de una lista de compras interactiva.
-  - Uso de `localStorage` para almacenar los elementos agregados.
+- **Día 5 y 6: Lista de Compras**
+  - Creación de una lista de compras categorizada.
   - Implementación de botones para agregar, mostrar y eliminar elementos de la lista.
+  - Validación para evitar agregar elementos duplicados en una categoría.
+  - Implementación de un mensaje de confirmación antes de eliminar un producto.
   - Manipulación dinámica del DOM para actualizar la interfaz en tiempo real.
-  - Uso de eventos `click` y `submit` para manejar la interacción del usuario.
+  - Uso de eventos click y submit para manejar la interacción del usuario.
 
 ---
 
@@ -70,7 +71,7 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
 ├── 📄 dia2.html    # Desafío del Día 2 - Variables y Captura de Datos
 ├── 📄 dia3.html    # Desafío del Día 3 - Estructuras de Control de Flujo
 ├── 📄 dia4.html    # Desafío del Día 4 - Adivinar el Número
-├── 📄 dia5.html    # Desafío del Día 5 - Lista de Compras
+├── 📄 dia5.html    # Desafío del Día 5 y 6 - Lista de Compras
 ├── 📂 styles
 │   ├── 📄 style.css   # Estilos generales del proyecto
 ├── 📂 js

@@ -9,6 +9,7 @@ let listaDeCompras = {
     Carnes: [],
     Otros: []
 };
+let eliminadoReciente = null; // Guarda el último elemento eliminado para deshacer
 
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize buttons
@@ -264,7 +265,7 @@ function agregarAlimento() {
 }
 
 function mostrarLista() {
-    let listaHtml = "<h3>Lista de Compras:</h3>";
+    let listaHtml = "<h3> 📜 🛒 Lista de Compras:</h3>";
 
     // Recorrer solo las categorías que tienen items
     for (let categoria in listaDeCompras) {
@@ -306,3 +307,30 @@ function eliminarAlimento(categoria, alimento) {
         updateButtonsState();
     }
 }
+
+
+//día 6 - lista supermercado mensaje de confirmación
+
+function eliminarAlimento(categoria, alimento) {
+    let confirmacion = confirm(`¿Seguro que quieres eliminar ${alimento} de la categoría ${categoria}?`);
+    
+    if (confirmacion) {
+        const index = listaDeCompras[categoria].indexOf(alimento);
+        if (index > -1) {
+            eliminadoReciente = { categoria, alimento };
+            listaDeCompras[categoria].splice(index, 1);
+            mostrarLista();
+            updateButtonsState();
+        }
+    }
+}
+
+function deshacerEliminacion() {
+    if (eliminadoReciente) {
+        listaDeCompras[eliminadoReciente.categoria].push(eliminadoReciente.alimento);
+        eliminadoReciente = null;
+        mostrarLista();
+        updateButtonsState();
+    }
+}
+

@@ -1,41 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#7DaysOfCode</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
-    <header>
-        <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="img">
-        <div class="retos-container">
-            <a class="header__menu__link" href="index.html">Inicio</a>
-        </div>
-    </header><br>
-    <main>
-        <div class="container">
-            <p><strong>🚀 Reto del Día 2: </strong>Captura de datos en JavaScript.</p>
-            <p>Responde las siguientes preguntas:</p>
-            <form id="formulario" class="form-dia2">
-                <label for="nombre">¿Cuál es tu nombre?</label>
-                <input type="text" id="nombre" required oninput="formatearTexto(this)">
+    <aside class="nav-lateral">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="dia1.html">Día 1</a></li>
+            <li><a href="dia2.html">Día 2</a></li>
+            <li><a href="dia3.html">Día 3</a></li>
+            <li><a href="dia4.html">Día 4</a></li>
+            <li><a href="dia5-6.html">Día 5 y 6</a></li>
+            <li><a href="dia7.html">Día 7</a></li>
+        </ul>
+    </aside>
 
-                <label for="edad">¿Cuántos años tienes?</label>
-                <input type="number" id="edad" required min="1" max="100">
+    <div class="main-content">
+        <header class="header-main">
+            <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="header-img">
+        </header>
+        
+        <main>
+            <div class="container">
+                <h1>🚀 Reto del Día 2: Captura de datos en JavaScript</h1>
+                <form id="formulario" class="form-container">
+                    <p>Responde las siguientes preguntas:</p>
+                    
+                    <div class="form-group">
+                        <label for="nombre">¿Cuál es tu nombre?</label>
+                        <input type="text" id="nombre" required oninput="formatearTexto(this)">
+                    </div>
 
-                <label for="lenguaje">¿Qué lenguaje de programación estás estudiando?</label>
-                <input type="text" id="lenguaje" required oninput="formatearTexto(this)">
+                    <div class="form-group">
+                        <label for="edad">¿Cuántos años tienes?</label>
+                        <input type="number" id="edad" required min="1" max="100">
+                    </div>
 
-                <button type="submit" id="btnEnviar">Enviar</button>
-            </form>
-            <p id="mensaje"></p>
-        </div>
-    </main>
+                    <div class="form-group">
+                        <label for="lenguaje">¿Qué lenguaje de programación estás estudiando?</label>
+                        <input type="text" id="lenguaje" required oninput="formatearTexto(this)">
+                    </div>
+                    
+                    <div class="button-container">
+                        <button type="submit" id="btnEnviar">Enviar Formulario</button>
+                    </div>
+                    
+                    <div id="mensaje"></div>
+                </form>
+            </div>
+        </main>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
-
 </html>

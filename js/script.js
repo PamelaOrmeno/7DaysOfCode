@@ -1,3 +1,4 @@
+// Variables globales para la lista de compras
 let agregarBtn, mostrarBtn, crearBtn;
 let isListVisible = false;
 let listaDeCompras = {
@@ -9,15 +10,116 @@ let listaDeCompras = {
     Carnes: [],
     Otros: []
 };
-let eliminadoReciente = null; // Guarda el último elemento eliminado para deshacer
 
+// Función para inicializar los botones y event listeners de la lista
+// Variables globales para control de eventos
+let eliminarHandler;
+let isProcessingDelete = false;
+
+function inicializarListaCompras() {
+    // Solo inicializar si estamos en la página de la lista de compras
+    if (!document.getElementById('listaCompras')) {
+        return; // No estamos en la página de la lista de compras
+    }
+
+    agregarBtn = document.getElementById('btnAgregar');
+    mostrarBtn = document.getElementById('btnMostrar');
+    crearBtn = document.getElementById('btnCrear');
+    const listaContainer = document.getElementById('listaCompras');
+
+    if (agregarBtn && mostrarBtn && crearBtn && listaContainer) {
+        console.log('Elementos encontrados y configurados');
+        
+        // Remover event listeners anteriores
+        agregarBtn.removeEventListener('click', agregarAlimento);
+        mostrarBtn.removeEventListener('click', mostrarLista);
+        crearBtn.removeEventListener('click', crearNuevaLista);
+        
+        if (eliminarHandler) {
+            listaContainer.removeEventListener('click', eliminarHandler);
+        }
+        
+        // Agregar nuevos event listeners
+        agregarBtn.addEventListener('click', agregarAlimento);
+        mostrarBtn.addEventListener('click', mostrarLista);
+        crearBtn.addEventListener('click', crearNuevaLista);
+        
+        // Crear nuevo handler para eliminar
+        eliminarHandler = function(e) {
+            const target = e.target;
+            
+            // Verificar si es un botón de eliminar y que no haya un proceso de eliminación en curso
+            if (target.classList.contains('eliminar') && !isProcessingDelete) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                
+                console.log('Click en botón eliminar (delegation):', target.dataset);
+                const { categoria, alimento } = target.dataset;
+                
+                // Desactivar el botón temporalmente
+                target.disabled = true;
+                eliminarAlimento(categoria, alimento);
+                target.disabled = false;
+            }
+        };
+        
+        // Remover el handler anterior si existe
+        if (listaContainer._eliminarHandler) {
+            listaContainer.removeEventListener('click', listaContainer._eliminarHandler);
+        }
+        
+        // Guardar referencia al handler actual
+        listaContainer._eliminarHandler = eliminarHandler;
+        
+        // Agregar el nuevo handler
+        listaContainer.addEventListener('click', eliminarHandler, { once: false });
+        
+        updateButtonsState();
+    } else {
+        console.error('Error: No se pudieron encontrar los elementos necesarios en la página');
+    }
+}
+
+// Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
-    // Initialize buttons
-    agregarBtn = document.querySelector('button[type="submit"]');
-    mostrarBtn = document.querySelector('button[onclick="mostrarLista()"]');
-    crearBtn = document.querySelector('button[onclick="crearNuevaLista()"]');
+    // Inicializar la lista de compras
+    inicializarListaCompras();
+    // Día 1 - Operaciones Booleanas
+    if (document.getElementById("btnCompararValores")) {
+        document.getElementById("btnCompararValores").addEventListener("click", compararValores);
+    }
 
-    // Add event listeners only if elements exist
+    // Día 2 - Variables y Captura de Datos
+    if (document.getElementById("formulario")) {
+        document.getElementById("formulario").addEventListener("submit", function (event) {
+            event.preventDefault();
+            procesarFormulario();
+        });
+    }
+
+    // Día 3 - Estructuras de Control de Flujo
+    const btnIniciar = document.getElementById('btnIniciar');
+    if (btnIniciar) {
+        btnIniciar.addEventListener('click', iniciarJuego);
+    }
+
+    // Día 4 - Juego Número Secreto
+    const btnJugar = document.getElementById('btnJugar');
+    if (btnJugar) {
+        btnJugar.addEventListener('click', function() {
+            // Limpiar mensajes antes de iniciar el juego
+            document.getElementById("mensaje-resultado").textContent = '';
+            document.getElementById("pista").textContent = '';
+            setTimeout(iniciarJuegoNumero, 100); // Pequeño retraso para asegurar que la UI se actualice
+        });
+    }
+
+    // Día 5 y 6 - Lista de Compras
+    agregarBtn = document.getElementById('btnAgregar');
+    mostrarBtn = document.getElementById('btnMostrar');
+    crearBtn = document.getElementById('btnCrear');
+
     const listaCompras = document.getElementById("listaCompras");
     if (listaCompras) {
         listaCompras.addEventListener("click", function (e) {
@@ -27,23 +129,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const formulario = document.getElementById("formulario");
-    if (formulario) {
-        formulario.addEventListener("submit", function (event) {
-            event.preventDefault();
-            agregarAlimento();
-        });
-    }
-    // Update button states
+    // Actualizar estado inicial de los botones
     updateButtonsState();
+
+    // Día 7 - Calculadora Interactiva
+    if (document.querySelector('button[onclick="calcular()"]')) {
+        document.querySelector('button[onclick="calcular()"]').addEventListener("click", calcular);
+    }
 });
 
 // Actualiza el estado de los botones según las reglas
 function updateButtonsState() {
+
     const isEmpty = isListEmpty();
-    if (mostrarBtn) mostrarBtn.disabled = isEmpty;
-    if (crearBtn) crearBtn.disabled = !isListVisible;
-    if (agregarBtn) agregarBtn.disabled = isListVisible;
+    if (mostrarBtn) {
+        mostrarBtn.disabled = isEmpty;
+        mostrarBtn.classList.toggle('disabled', isEmpty);
+    }
+    if (crearBtn) {
+        crearBtn.disabled = !isListVisible;
+        crearBtn.classList.toggle('disabled', !isListVisible);
+    }
+    if (agregarBtn) {
+        agregarBtn.disabled = isListVisible;
+        agregarBtn.classList.toggle('disabled', isListVisible);
+    }
 }
 
 // Verifica si la lista está vacía
@@ -120,6 +230,11 @@ function procesarFormulario() {
             } else {
                 alert("Oh, qué pena... ¿Ya intentaste aprender otros lenguajes?");
             }
+
+            // Limpiar el formulario después de mostrar los mensajes
+            nombreElement.value = '';
+            edadElement.value = '';
+            lenguajeElement.value = '';
         }, 500);
     } else {
         console.error("Uno o más elementos del formulario no se encontraron.");
@@ -182,30 +297,51 @@ function iniciarJuego() {
 
 //Día 4 - Juego Número Secreto
 function iniciarJuegoNumero() {
+    // Obtener elementos del DOM
+    const mensajeResultado = document.getElementById("mensaje-resultado");
+    const pistaContainer = document.getElementById("pista");
+
+    // Inicializar variables del juego
     const numeroSecreto = Math.floor(Math.random() * 11);
     let intentos = 3;
-    let acierto = false;
 
-    while (intentos > 0) {
-        let intentoUsuario = parseInt(prompt(`Ingresa un número entre 0 y 10 (Intentos restantes: ${intentos})`));
+    // Función para manejar cada intento
+    function manejarIntento() {
+        const intentoUsuario = parseInt(prompt(`Ingresa un número entre 0 y 10 (Intentos restantes: ${intentos})`));
 
+        // Validar entrada
         if (isNaN(intentoUsuario) || intentoUsuario < 0 || intentoUsuario > 10) {
             alert("Por favor, ingresa un número válido entre 0 y 10.");
-            continue;
+            return manejarIntento();
         }
 
+        // Comprobar el número
         if (intentoUsuario === numeroSecreto) {
-            document.getElementById("mensaje-resultado").textContent = `🎉 ¡Felicidades! Acertaste el número ${numeroSecreto}.`;
-            acierto = true;
-            break;
+            mensajeResultado.textContent = `🎉 ¡Felicidades! Acertaste el número ${numeroSecreto}.`;
+            return true; // Acierto
+        }
+
+        // Dar pista
+        const pista = intentoUsuario < numeroSecreto ? 
+            "El número secreto es MAYOR que tu número" : 
+            "El número secreto es MENOR que tu número";
+        alert(`💡 ${pista}`);
+
+        // Actualizar intentos y mensaje
+        intentos--;
+        if (intentos > 0) {
+            mensajeResultado.textContent = `❌ No es el número correcto. Te quedan ${intentos} intentos.`;
+            return false;
         } else {
-            alert("❌ No es el número correcto.");
-            intentos--;
+            mensajeResultado.textContent = `😢 Lo siento, te quedaste sin intentos. El número era ${numeroSecreto}.`;
+            return true; // Fin del juego
         }
     }
 
-    if (!acierto) {
-        document.getElementById("mensaje-resultado").textContent = `😢 Lo siento, te quedaste sin intentos. El número era ${numeroSecreto}.`;
+    // Bucle principal del juego
+    let juegoTerminado = false;
+    while (!juegoTerminado) {
+        juegoTerminado = manejarIntento();
     }
 }
 
@@ -237,27 +373,52 @@ function agregarAlimento() {
         let alimento = alimentoElement.value.trim();
         let categoria = categoriaElement.value;
 
-        if (alimento === "") {
-            alert("Por favor, ingresa un alimento.");
-            return;
-        }
+        console.log('Intentando agregar:', { alimento, categoria });
+        console.log('Estado actual de listaDeCompras:', listaDeCompras);
 
+        // Primero validamos que la categoría sea válida
         if (categoria === "Selecciona") {
             alert("Por favor, selecciona una categoría.");
             return;
         }
 
-        // Verificar si el alimento ya existe en la categoría
+        // Luego validamos que la categoría exista en listaDeCompras
+        if (!listaDeCompras.hasOwnProperty(categoria)) {
+            alert("Categoría no válida.");
+            return;
+        }
+
+        // Validar que el alimento no esté vacío
+        if (!alimento) {
+            alert("Por favor, ingresa un alimento.");
+            return;
+        }
+
+        // Finalmente verificamos si el alimento ya existe
         if (listaDeCompras[categoria].includes(alimento)) {
             alert("Este alimento ya está en la lista.");
             return;
         }
 
+        // Si la lista está visible, ocultarla antes de agregar
+        // Agregar el alimento a la lista
+        if (!Array.isArray(listaDeCompras[categoria])) {
+            listaDeCompras[categoria] = [];
+        }
         listaDeCompras[categoria].push(alimento);
+        console.log(`Alimento ${alimento} agregado a ${categoria}`);
+        console.log('Lista actualizada:', listaDeCompras);
+
+        // Limpiar el formulario
         alimentoElement.value = "";
         categoriaElement.value = "Selecciona";
-        alert("Alimento agregado correctamente!");
+        
+        // Si la lista está visible, actualizarla
+        if (isListVisible) {
+            mostrarLista();
+        }
 
+        alert("Alimento agregado correctamente!");
         updateButtonsState();
     } else {
         console.error("Uno o más elementos del formulario no se encontraron.");
@@ -265,63 +426,120 @@ function agregarAlimento() {
 }
 
 function mostrarLista() {
-    let listaHtml = "<h3> 📜 🛒 Lista de Compras:</h3>";
-
-    // Recorrer solo las categorías que tienen items
-    for (let categoria in listaDeCompras) {
-        // Saltar la categoría "Selecciona"
-        if (categoria === "Selecciona") {
-            continue;
-        }
-
-        listaHtml += `<div class="categoria-titulo">${categoria}:</div>`;
-        listaHtml += `<div class="categoria-items">`;
-
-        if (listaDeCompras[categoria].length === 0) {
-            listaHtml += `<div class="vacio">Nada por aquí</div>`;
-        } else {
-            listaDeCompras[categoria].forEach(alimento => {
-                listaHtml += `
-                <div class="item">
-                 <span>${alimento}</span>
-                 <button class="eliminar" 
-                data-categoria="${categoria}" 
-                data-alimento="${alimento}">X</button>
-                </div>`;
-            });
-        }
-        listaHtml += `</div>`; // Cierre de categoria-items
+    console.log('Iniciando mostrarLista');
+    
+    // Obtener el contenedor de la lista
+    const listaContainer = document.getElementById('listaCompras');
+    if (!listaContainer) {
+        console.error('No se encontró el contenedor de la lista');
+        return;
     }
 
-    document.getElementById("listaCompras").innerHTML = listaHtml;
+    // Verificar si hay elementos en la lista
+    let hayElementos = false;
+    let listaHtml = '';
+
+    // Recorrer las categorías
+    for (let categoria in listaDeCompras) {
+        if (categoria === 'Selecciona') continue;
+
+        const items = listaDeCompras[categoria];
+        console.log(`Categoría ${categoria}:`, items);
+
+        if (items && items.length > 0) {
+            hayElementos = true;
+            listaHtml += `
+                <div class="categoria">
+                    <div class="categoria-titulo">${categoria}</div>
+                    <div class="categoria-items">`;
+
+            items.forEach(alimento => {
+                listaHtml += `
+                    <div class="item">
+                        <span>${alimento}</span>
+                        <button class="eliminar" 
+                            data-categoria="${categoria}" 
+                            data-alimento="${alimento}">X</button>
+                    </div>`;
+            });
+
+            listaHtml += '</div></div>';
+        }
+    }
+
+    // Construir el HTML final
+    const htmlFinal = `
+        <div class="lista-header">
+            <h3>📜 🛒 Lista de Compras</h3>
+        </div>
+        <div class="lista-contenido">
+            ${!hayElementos ? 
+                '<div class="mensaje-vacio">No hay elementos en la lista</div>' : 
+                listaHtml
+            }
+        </div>`;
+
+    // Mostrar la lista
+    console.log('Mostrando lista');
+    console.log('Estado de la lista:', { hayElementos });
+    console.log('HTML Final:', htmlFinal);
+
+    // Actualizar el contenedor
+    listaContainer.innerHTML = htmlFinal;
+
 
     isListVisible = true;
     updateButtonsState();
+    console.log('Lista mostrada correctamente');
 }
-
-function eliminarAlimento(categoria, alimento) {
-    const index = listaDeCompras[categoria].indexOf(alimento);
-    if (index > -1) {
-        listaDeCompras[categoria].splice(index, 1);
-        mostrarLista(); // Actualizar la vista
-        updateButtonsState();
-    }
-}
-
 
 //día 6 - lista supermercado mensaje de confirmación
-
 function eliminarAlimento(categoria, alimento) {
-    let confirmacion = confirm(`¿Seguro que quieres eliminar ${alimento} de la categoría ${categoria}?`);
+    // Prevenir múltiples llamadas simultáneas
+    if (isProcessingDelete) {
+        console.log('Ya hay una eliminación en proceso');
+        return;
+    }
     
-    if (confirmacion) {
+    try {
+        isProcessingDelete = true;
+        console.log('Iniciando eliminarAlimento:', { categoria, alimento });
+        
+        // Validar que la categoría existe
+        if (!listaDeCompras.hasOwnProperty(categoria)) {
+            console.error('Categoría no válida:', categoria);
+            return;
+        }
+
+        // Validar que el array existe
+        if (!Array.isArray(listaDeCompras[categoria])) {
+            console.error('La categoría no tiene un array válido:', categoria);
+            return;
+        }
+
+        // Buscar el alimento en el array (case sensitive)
         const index = listaDeCompras[categoria].indexOf(alimento);
-        if (index > -1) {
+        console.log('Búsqueda de índice para:', { categoria, alimento, index });
+        
+        if (index === -1) {
+            console.error('Alimento no encontrado en la categoría');
+            return;
+        }
+
+        let confirmacion = confirm(`¿Seguro que quieres eliminar ${alimento} de la categoría ${categoria}?`);
+        console.log('Respuesta confirmación:', confirmacion);
+        
+        if (confirmacion) {
             eliminadoReciente = { categoria, alimento };
             listaDeCompras[categoria].splice(index, 1);
+            console.log('Elemento eliminado:', { categoria, alimento });
+            console.log('Estado actual de la lista:', listaDeCompras);
             mostrarLista();
             updateButtonsState();
         }
+    } finally {
+        isProcessingDelete = false;
+        console.log('Proceso de eliminación finalizado');
     }
 }
 
@@ -334,3 +552,135 @@ function deshacerEliminacion() {
     }
 }
 
+
+//día 7 - Calculadora interactiva
+
+// Historial de operaciones
+let historialOperaciones = [];
+
+function sumar(a, b) {
+    return a + b;
+}
+
+function restar(a, b) {
+    return a - b;
+}
+
+function multiplicar(a, b) {
+    return a * b;
+}
+
+function dividir(a, b) {
+    if (b === 0) {
+        throw new Error("No se puede dividir por cero");
+    }
+    return a / b;
+}
+
+function validarNumero(input, errorId) {
+    const valor = parseFloat(input.value);
+    const errorDiv = document.getElementById(errorId);
+    
+    if (isNaN(valor)) {
+        errorDiv.textContent = "Por favor, ingrese un número válido";
+        input.classList.add('error');
+        return false;
+    }
+    
+    errorDiv.textContent = "";
+    input.classList.remove('error');
+    return true;
+}
+
+function obtenerSimboloOperacion(operacion) {
+    const simbolos = {
+        sumar: '+',
+        restar: '-',
+        multiplicar: '×',
+        dividir: '÷'
+    };
+    return simbolos[operacion] || '';
+}
+
+function agregarAlHistorial(num1, num2, operacion, resultado) {
+    const simbolo = obtenerSimboloOperacion(operacion);
+    const operacionTexto = `${num1} ${simbolo} ${num2} = ${resultado}`;
+    
+    historialOperaciones.unshift(operacionTexto);
+    if (historialOperaciones.length > 5) {
+        historialOperaciones.pop();
+    }
+    
+    const historialLista = document.getElementById('historial');
+    historialLista.innerHTML = historialOperaciones
+        .map(op => `<li>${op}</li>`)
+        .join('');
+}
+
+function limpiarFormulario() {
+    document.getElementById('calculadoraForm').reset();
+    document.getElementById('num1Error').textContent = '';
+    document.getElementById('num2Error').textContent = '';
+    document.getElementById('resultado').textContent = '';
+    
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => input.classList.remove('error'));
+}
+
+function calcular(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const num1Input = document.getElementById("num1");
+    const num2Input = document.getElementById("num2");
+    const operacion = document.getElementById("operacion").value;
+    const resultadoDiv = document.getElementById("resultado");
+
+    // Validar inputs
+    const num1Valido = validarNumero(num1Input, 'num1Error');
+    const num2Valido = validarNumero(num2Input, 'num2Error');
+
+    if (!num1Valido || !num2Valido) {
+        return;
+    }
+
+    const num1 = parseFloat(num1Input.value);
+    const num2 = parseFloat(num2Input.value);
+
+    try {
+        let resultado;
+        switch (operacion) {
+            case "sumar":
+                resultado = sumar(num1, num2);
+                break;
+            case "restar":
+                resultado = restar(num1, num2);
+                break;
+            case "multiplicar":
+                resultado = multiplicar(num1, num2);
+                break;
+            case "dividir":
+                resultado = dividir(num1, num2);
+                break;
+        }
+
+        // Formatear el resultado para mostrar máximo 4 decimales
+        const resultadoFormateado = Number.isInteger(resultado) ? 
+            resultado : 
+            parseFloat(resultado.toFixed(4));
+
+        resultadoDiv.textContent = `El resultado es: ${resultadoFormateado}`;
+        agregarAlHistorial(num1, num2, operacion, resultadoFormateado);
+
+        // Agregar clase para animación
+        resultadoDiv.classList.add('resultado-animado');
+        setTimeout(() => {
+            resultadoDiv.classList.remove('resultado-animado');
+        }, 500);
+
+    } catch (error) {
+        resultadoDiv.textContent = error.message;
+        resultadoDiv.classList.add('error');
+    }
+}

@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Compras</title>
-    <link rel="stylesheet" href="/styles/style.css">
+    <title>#7DaysOfCode</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
-    <header>
-        <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="img">
-        <div class="retos-container">
-            <a class="header__menu__link" href="index.html">Inicio</a>
-        </div>
-    </header>
-    <main>
+    <aside class="nav-lateral">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="dia1.html">Día 1</a></li>
+            <li><a href="dia2.html">Día 2</a></li>
+            <li><a href="dia3.html">Día 3</a></li>
+            <li><a href="dia4.html">Día 4</a></li>
+            <li><a href="dia5-6.html">Día 5 y 6</a></li>
+            <li><a href="dia7.html">Día 7</a></li>
+        </ul>
+    </aside>
 
-            
-
-        <div class="container">
-            <p><strong>🚀 Reto del Día 5 y 6:</strong> Lista de compras.</p>  
-            <form id="formulario">
-                <div class="input-group">
-                    <label for="alimento">Nombre del alimento:</label>
-                    <input type="text" id="alimento" placeholder="Ej: Manzana" oninput="formatearTexto(this)" maxlength="50">
+    <div class="main-content">
+        <header class="header-main">
+            <img src="assets/Header-7RETOS.jpg" alt="#7DaysOfCode" class="header-img">
+        </header>
+        <main>
+            <div class="container">
+                <h1>🚀 Reto del Día 5 y 6: Lista de compras</h1>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="alimento">Nombre del alimento:</label>
+                        <input type="text" id="alimento" required placeholder="Ej: Manzana" oninput="formatearTexto(this)" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoría:</label>
+                        <select id="categoria" required>
+                            <option value="Selecciona">Selecciona Categoría</option>
+                            <option value="Frutas">Frutas</option>
+                            <option value="Verduras">Verduras</option>
+                            <option value="Lácteos">Lácteos</option>
+                            <option value="Congelados">Congelados</option>
+                            <option value="Dulces">Dulces</option>
+                            <option value="Carnes">Carnes</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                    <div class="button-container">
+                        <button type="button" id="btnAgregar">Agregar</button>
+                        <button type="button" id="btnMostrar">Mostrar Lista</button>
+                        <button type="button" id="btnCrear">Crear nueva lista</button>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="categoria">Categoría:</label>
-                    <select id="categoria">
-                        <option value="Selecciona">Selecciona Categoría</option>
-                        <option value="Frutas">Frutas</option>
-                        <option value="Verduras">Verduras</option>
-                        <option value="Lácteos">Lácteos</option>
-                        <option value="Congelados">Congelados</option>
-                        <option value="Dulces">Dulces</option>
-                        <option value="Carnes">Carnes</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                </div>
-                <div class="botones-container">
-                    <button type="submit">Agregar</button>
-                    <button type="button" onclick="mostrarLista()">Mostrar Lista</button>
-                    <button type="button" onclick="crearNuevaLista()">Crear nueva lista</button>
-                </div>
-            </form>
-  
-            <div id="listaCompras"></div>
-        </div>
-    </main>
-        <script src="/js/script.js"></script>
+                <div id="listaCompras" class="lista-container"></div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
 </body>
-
 </html>

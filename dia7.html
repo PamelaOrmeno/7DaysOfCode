@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora interactiva - Día 7 del reto #7DaysOfCode">
+    <title>#7DaysOfCode - Calculadora</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <aside class="nav-lateral" role="navigation">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="dia1.html">Día 1</a></li>
+            <li><a href="dia2.html">Día 2</a></li>
+            <li><a href="dia3.html">Día 3</a></li>
+            <li><a href="dia4.html">Día 4</a></li>
+            <li><a href="dia5-6.html">Día 5 y 6</a></li>
+            <li><a href="dia7.html" aria-current="page">Día 7</a></li>
+        </ul>
+    </aside>
+
+    <div class="main-content">
+        <header class="header-main">
+            <img src="assets/Header-7RETOS.jpg" alt="Banner del reto #7DaysOfCode" class="header-img">
+        </header>
+        
+        <main>
+            <div class="container">
+                <h1>🎯 Reto del Día 7: Calculadora Interactiva</h1>
+                <form id="calculadoraForm" class="form-container" onsubmit="calcular(event)">
+                    <div class="form-group">
+                        <label for="num1">Ingrese el primer número:</label>
+                        <input 
+                            type="number" 
+                            id="num1" 
+                            name="num1"
+                            placeholder="Ej: 10" 
+                            required 
+                            aria-label="Primer número"
+                            autocomplete="off"
+                            step="any">
+                        <div class="error-message" id="num1Error" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="num2">Ingrese el segundo número:</label>
+                        <input 
+                            type="number" 
+                            id="num2" 
+                            name="num2"
+                            placeholder="Ej: 5" 
+                            required 
+                            aria-label="Segundo número"
+                            autocomplete="off"
+                            step="any">
+                        <div class="error-message" id="num2Error" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="operacion">Seleccione una operación:</label>
+                        <select 
+                            id="operacion" 
+                            name="operacion"
+                            required 
+                            aria-label="Operación matemática">
+                            <option value="sumar">Suma (+)</option>
+                            <option value="restar">Resta (-)</option>
+                            <option value="multiplicar">Multiplicación (×)</option>
+                            <option value="dividir">División (÷)</option>
+                        </select>
+                    </div>
+
+                    <div class="button-container">
+                        <button type="submit" class="btn-calcular">Calcular</button>
+                        <button type="button" class="btn-limpiar" onclick="limpiarFormulario()">Limpiar</button>
+                    </div>
+
+                    <div id="resultado" class="resultado-dia7" role="status" aria-live="polite"></div>
+                    
+                    <div class="historial-container">
+                        <h2>Historial de operaciones</h2>
+                        <ul id="historial" class="historial-lista" aria-label="Historial de operaciones realizadas"></ul>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

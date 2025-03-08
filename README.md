@@ -49,6 +49,13 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
   - Manipulación dinámica del DOM para actualizar la interfaz en tiempo real.
   - Uso de eventos click y submit para manejar la interacción del usuario.
 
+- **Día 7: Integración y Mejoras en el Front-End**
+- Desarrollo de una interfaz de usuario más intuitiva y atractiva.
+- Optimización del diseño visual mediante CSS.
+- Implementación de animaciones y transiciones para mejorar la experiencia de usuario.
+- Estructuración del HTML para mejorar la accesibilidad y la organización del contenido.
+- Mejora del rendimiento y la interactividad de los elementos.
+
 ---
 
 ## 🛠 Cómo Ejecutarlo Localmente
@@ -71,7 +78,8 @@ Este repositorio almacena los diferentes retos completados de **#7DaysOfCode**. 
 ├── 📄 dia2.html    # Desafío del Día 2 - Variables y Captura de Datos
 ├── 📄 dia3.html    # Desafío del Día 3 - Estructuras de Control de Flujo
 ├── 📄 dia4.html    # Desafío del Día 4 - Adivinar el Número
-├── 📄 dia5.html    # Desafío del Día 5 y 6 - Lista de Compras
+├── 📄 dia5-6.html  # Desafío del Día 5 y 6 - Lista de Compras
+├── 📄 dia7.html    # Desafío del Día 7 - Integración y Mejoras del Front-End
 ├── 📂 styles
 │   ├── 📄 style.css   # Estilos generales del proyecto
 ├── 📂 js
